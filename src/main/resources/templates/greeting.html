@@ -2,15 +2,52 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Getting Started: Serving Web Content</title>
+    <title>Greetings</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <!--<p th:text="|Hello, ${name}!|"/>-->
-<p>Hello greeting demo</p>
-<p th:text="|Hello, ${create.greetingMessage}!|"/>
-<script>
-    function showInfor(){
-    }
-</script>
+<p th:if="${error}" th:text="|Error: ${error}|"></p>
+
+<fieldset>
+    <legend>List</legend>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Message</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="greeting : ${greetings}">
+            <td th:text="${greeting.id}"></td>
+            <td th:text="${greeting.greetingMessage}"></td>
+            <td th:text="${#dates.format(greeting.dateGreeting, 'yyyy-MM-dd')}"></td>
+            <td>
+                <a th:href="@{/greetings/update/{id}(id=${greeting.id})}">Update</a>
+                <a th:href="@{/greetings/delete/{id}(id=${greeting.id})}">Delete</a></td>
+        </tr>
+
+        </tbody>
+    </table>
+</fieldset>
+
+<fieldset>
+    <legend>Create</legend>
+    <form th:action="@{/greetings}"
+          th:object="${greeting}" method="post">
+        <label for="idMessage">ID</label>
+        <input type="number" id="idMessage" name="idMessage" th:field="*{id}" required>
+        <label for="message">Message</label>
+        <input type="text" id="message" name="message" th:field="*{greetingMessage}">
+        <label for="dateGreeting">Date:</label>
+        <input type="date" id="dateGreeting" name="dateGreeting" th:field="${greeting.dateGreeting}">
+        <input type="submit" value="Create">
+    </form>
+</fieldset>
+
+
 </body>
 </html>

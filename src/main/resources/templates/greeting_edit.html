@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Greeting Editor</title>
+    <style>
+        body {
+  font-family: Arial, Helvetica, sans-serif;
+    margin: auto;
+    margin-top:20px;
+    width:50%;
+}
+
+fieldset {
+  background-color: rgba(255, 99, 71, 0.2);
+  margin-top:20px;
+  padding:15px;
+}
+
+legend {
+  background-color: rgb(255, 0, 0);
+  color: white;
+  padding: 5px 15px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td, #table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+  padding: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+input[type=number],
+input[type=text],
+input[type=date],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+    </style>
+</head>
+<body>
+<!--<p th:text="|Hello, ${name}!|"/>-->
+<p th:if="${error}" th:text="|Error: ${error}|"></p>
+<fieldset>
+    <legend>Update</legend>
+    <form th:action="@{/greetings/update/{id}(id=${greeting.id})}"
+          th:object="${greeting}" method="post">
+        <label for="idMessageUpdate">ID</label>
+        <input type="number" id="idMessageUpdate" th:field="*{id}" readonly disabled>
+        <label for="messageUpdate">Message</label>
+        <input type="text" id="messageUpdate" th:field="*{greetingMessage}">
+        <label for="dateGreetingUpdate">Date:</label>
+        <input type="date" id="dateGreetingUpdate" th:field="${greeting.dateGreeting}">
+        <input type="submit" value="Update">
+    </form>
+</fieldset>
+</body>
+</html>
