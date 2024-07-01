@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Getting Started: Serving Web Content</title>
+</head>
+<body>
+<!--<p th:text="|Hello, ${name}!|"/>-->
+<p>Hello greeting demo</p>
+<h2>Read list</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Message</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="greeting : ${greetings}">
+        <td th:text="${greeting.greetingMessage}"></td>
+        <td th:text="${greeting.dateGreeting}"></td>
+    </tr>
+
+    </tbody>
+</table>
+
+</body>
+</html>

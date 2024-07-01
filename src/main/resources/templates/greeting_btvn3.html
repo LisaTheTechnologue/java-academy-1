@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Getting Started: Serving Web Content</title>
+</head>
+<body>
+<!--<p th:text="|Hello, ${name}!|"/>-->
+<p th:if="${error}" th:text="|Error: ${error}|"></p>
+<h2>Read list</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Message</th>
+        <th>Date</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="greeting : ${greetings}">
+        <td th:text="${greeting.id}"></td>
+        <td th:text="${greeting.greetingMessage}"></td>
+        <td th:text="${#dates.format(greeting.dateGreeting, 'yyyy-MM-dd')}"></td>
+        <td>
+            <a th:href="@{/greeting-btvn3/update/{id}(id=${greeting.id})}">Update</a>
+            <a th:href="@{/greeting-btvn3/delete/{id}(id=${greeting.id})}">Delete</a></td>
+    </tr>
+
+    </tbody>
+</table>
+
+<h2>Create</h2>
+<form th:action="@{/greeting-btvn3}" th:object="${greeting}" method="post">
+    <label for="idMessage">ID</label>
+    <input type="number" id="idMessage" name="idMessage" th:field="*{id}" required><br>
+    <label for="message">Message</label>
+    <input type="text" id="message" name="message" th:field="*{greetingMessage}"><br>
+    <label for="dateGreeting">Date:</label>
+    <input type="date" id="dateGreeting" name="dateGreeting" th:field="${greeting.dateGreeting}"><br><br>
+    <input type="submit" value="Create">
+</form>
+
+
+
+</body>
+</html>
