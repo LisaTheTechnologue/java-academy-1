@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<fieldset>
+    <legend>Login</legend>
+    <form th:action="@{/login}"
+          th:object="${user}" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" th:field="*{username}"/>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" th:field="*{password}"/>
+        <span th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></span>
+        <input type="submit" value="Login">
+    </form>
+</fieldset>
+
+</body>
+</html>

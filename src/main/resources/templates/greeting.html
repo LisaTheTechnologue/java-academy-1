@@ -7,7 +7,6 @@
 </head>
 <body>
 <!--<p th:text="|Hello, ${name}!|"/>-->
-<p th:if="${error}" th:text="|Error: ${error}|"></p>
 
 <fieldset>
     <legend>List</legend>
@@ -26,8 +25,8 @@
             <td th:text="${greeting.greetingMessage}"></td>
             <td th:text="${#dates.format(greeting.dateGreeting, 'yyyy-MM-dd')}"></td>
             <td>
-                <a th:href="@{/greetings/update/{id}(id=${greeting.id})}">Update</a>
-                <a th:href="@{/greetings/delete/{id}(id=${greeting.id})}">Delete</a></td>
+                <a th:href="@{/greetings/update/{id}(id=${greeting.id})}"><button style="background-color: blue; ">Update</button></a>
+                <a th:href="@{/greetings/delete/{id}(id=${greeting.id})}"><button style="background-color: red; ">Delete</button></a></td>
         </tr>
 
         </tbody>
@@ -45,6 +44,7 @@
         <label for="dateGreeting">Date:</label>
         <input type="date" id="dateGreeting" name="dateGreeting" th:field="${greeting.dateGreeting}">
         <input type="submit" value="Create">
+        <p th:if="${error}" th:text="|Error: ${error}|" style="color: red;"></p>
     </form>
 </fieldset>
 
